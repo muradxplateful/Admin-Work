@@ -90,7 +90,8 @@ def norm(s):
 
 
 def tab_text(c, title):
-    return "\n".join(c.get("tabs", {}).get(title, []))
+    """Plain text of a tab: line-kind prefix and **bold** markers removed."""
+    return "\n".join(l.partition(" ")[2].replace("**", "") for l in c.get("tabs", {}).get(title, []))
 
 
 def check_concept(c, allowed, run_week, errors, warnings):
@@ -111,6 +112,8 @@ def check_concept(c, allowed, run_week, errors, warnings):
     n.update(product=c["product"], funnel=c["funnel"], fb_page=c["fb_page"])
     ed = CFG["editors"].get(c["editor"])
     n["editor"] = ed["glossary"] if ed else c.get("editor_glossary", c["editor"])
+    if not ((ed or {}).get("clickup_id") or c.get("editor_clickup_id")):
+        errors.append(f"{name}: editor {c['editor']!r} has no ClickUp user ID (add them to config.json editors)")
     for key in list(GLOSSARY_COLS) + ["funnel"]:
         v = n.get(key, "")
         if v not in allowed.get(key, set()):

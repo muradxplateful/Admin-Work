@@ -79,7 +79,10 @@
   "editors": {
     "Azlaan": {"clickup_id": "112621019", "glossary": "Azlaan"},
     "Kamran": {"clickup_id": "112620713", "glossary": "Kamran"},
-    "Muhammad Haris": {"clickup_id": "112619216", "glossary": "Muhamad"}
+    "Muhammad Haris": {"clickup_id": "112619216", "glossary": "Muhamad"},
+    "Sid": {"clickup_id": "112620698", "glossary": "Sid"},
+    "Franz": {"clickup_id": "112620715", "glossary": "Franz"},
+    "John M": {"clickup_id": "112623413", "glossary": "John M"}
   },
   "product_names": {"BVS": "VacuSeal", "JVS": "Jar Vacuum Sealer", "Pan": "Titanium Pan", "FWM": "Food Warming Mat", "CB": "Titanium Cutting Board", "CWS": "Cookware Set"}
 }

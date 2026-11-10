@@ -12,7 +12,8 @@ soft line break (used for rhyming couplets in the Script tab).
 
 Usage:
     doc_requests.py build  --spec SPEC.json --doc READ_DOC.json --tab ALL > reqs.json
-        (or --tab "Brief" for one tab). Tabs are separate index spaces, so all three
+        (or --tab "Brief" for one tab; add --lines 0:90, then read again and
+        --lines 90: to split a long tab over two calls). Tabs are separate index spaces, so all three
         tabs of a fresh copy can go in one update_doc call. The output is the full
         update_doc arguments: documentId, requests, writeControl.
     doc_requests.py verify --spec SPEC.json --doc READ_DOC.json
@@ -60,10 +61,10 @@ def tab_text(tab):
     return txt
 
 
-def layout(lines):
-    """Return (text, paragraphs, bold ranges, links) with indexes starting at 1."""
+def layout(lines, base=1):
+    """Return (text, paragraphs, bold ranges, links) with indexes starting at base."""
     parts, paras, bolds, links = [], [], [], []
-    pos = 1
+    pos = base
     for raw in lines:
         kind, _, body = raw.partition(" ")
         if kind not in KINDS:
@@ -86,23 +87,33 @@ def layout(lines):
     return "".join(parts), paras, bolds, links
 
 
-def build(spec, doc, tab_title):
+def build(spec, doc, tab_title, lines_range=None):
+    """Requests that rewrite a tab. lines_range "a:b" writes only spec lines a..b-1:
+    a == 0 replaces the tab with them, a > 0 appends them after what is there
+    (use it to split a long tab over two calls)."""
     tabs = tab_map(doc)
     if tab_title not in tabs:
         raise SystemExit(f"Tab {tab_title!r} not in doc. Tabs: {list(tabs)}")
     tab = tabs[tab_title]
     tid = tab["tabProperties"]["tabId"]
     old_end = tab["documentTab"]["body"]["content"][-1]["endIndex"]
-    text, paras, bolds, links = layout(spec["tabs"][tab_title])
-    end = 1 + u16(text)
+    lines = spec["tabs"][tab_title]
+    a, b = 0, len(lines)
+    if lines_range:
+        x, _, y = lines_range.partition(":")
+        a, b = int(x or 0), int(y or len(lines))
+    append = a > 0
+    base = old_end - 1 if append else 1
+    text, paras, bolds, links = layout(lines[a:b], base)
+    end = base + u16(text)
     rng = lambda s, e: {"startIndex": s, "endIndex": e, "tabId": tid}
     reqs = []
-    if old_end - 1 > 1:
+    if not append and old_end - 1 > 1:
         reqs.append({"deleteContentRange": {"range": rng(1, old_end - 1)}})
-    reqs.append({"insertText": {"location": {"index": 1, "tabId": tid}, "text": text}})
-    reqs.append({"updateParagraphStyle": {"range": rng(1, end), "paragraphStyle": {"namedStyleType": "NORMAL_TEXT"}, "fields": "namedStyleType"}})
-    reqs.append({"deleteParagraphBullets": {"range": rng(1, end)}})
-    reqs.append({"updateTextStyle": {"range": rng(1, end), "textStyle": {"bold": False, "italic": False}, "fields": "bold,italic,link"}})
+    reqs.append({"insertText": {"location": {"index": base, "tabId": tid}, "text": text}})
+    reqs.append({"updateParagraphStyle": {"range": rng(base, end), "paragraphStyle": {"namedStyleType": "NORMAL_TEXT"}, "fields": "namedStyleType"}})
+    reqs.append({"deleteParagraphBullets": {"range": rng(base, end)}})
+    reqs.append({"updateTextStyle": {"range": rng(base, end), "textStyle": {"bold": False, "italic": False}, "fields": "bold,italic,link"}})
     for kind, s, e in paras:
         if kind in STYLE:
             reqs.append({"updateParagraphStyle": {"range": rng(s, e), "paragraphStyle": {"namedStyleType": STYLE[kind]}, "fields": "namedStyleType"}})
@@ -151,6 +162,7 @@ def main():
     ap.add_argument("--spec", required=True)
     ap.add_argument("--doc", required=True)
     ap.add_argument("--tab")
+    ap.add_argument("--lines", help='only spec lines a:b of the tab; a > 0 appends (split a long tab over two calls)')
     a = ap.parse_args()
     spec, doc = json.load(open(a.spec)), load_doc(a.doc)
     if a.cmd == "build":
@@ -159,7 +171,7 @@ def main():
         titles = list(spec["tabs"]) if a.tab == "ALL" else [a.tab]
         reqs = []
         for t in titles:
-            reqs += build(spec, doc, t)["requests"]
+            reqs += build(spec, doc, t, a.lines)["requests"]
         out = {"documentId": doc.get("documentId"), "requests": reqs,
                "writeControl": {"requiredRevisionId": doc.get("revisionId")}}
         json.dump(out, sys.stdout, ensure_ascii=False, separators=(",", ":"))

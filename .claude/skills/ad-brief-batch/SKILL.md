@@ -45,7 +45,9 @@ tool with the same ranges and save each result to the same file name.
 
 Copy `templates/concept.example.json` (a finished, tested concept: ReturnedOrderVoicemail) and fill it in `concept-<Name>.json`:
 
-- meta: concept (CamelCase), product code, funnel, editor, fb_page, launch_date,
+- meta: concept (CamelCase), product code, funnel, editor (a key of `editors` in
+  `config.json`; add a new editor there first, with their ClickUp user ID from
+  `clickup_get_workspace_members` and their Ad Glossary spelling), fb_page, launch_date,
   awareness (unaware, problem, solution, product, most), concept_type (new, iteration...),
   persona_label, no_hook_variation (true for Song ads by default).
 - `naming`: glossary values for format, persona, pain, story, mech, actor, itnn,
@@ -73,6 +75,9 @@ For each concept:
    `python3 $S/doc_requests.py build --spec concept-<Name>.json --doc <read path> --tab Brief`
    (`--tab Script`, `--tab "Editor Brief"`, or `--tab ALL` when the total is small).
    Requests for different tabs built from the same read can go in one call.
+   A long tab (a cinematic Editor Brief can pass 13,000 characters) still goes over
+   25 KB on its own: split it with `--lines 0:<n>` (replaces the tab with lines
+   0 to n) and then, after a fresh read, `--lines <n>:` (appends the rest).
 4. `read_doc` again and run `python3 $S/doc_requests.py verify --spec concept-<Name>.json --doc <read path>`.
    It must print ALL OK. Fix and resend anything that fails.
 5. Put the doc link (`https://docs.google.com/document/d/<id>/edit`) in the concept
