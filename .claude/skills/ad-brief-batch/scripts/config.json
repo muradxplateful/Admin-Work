@@ -1,0 +1,85 @@
+{
+  "_note": "IDs used by names.py and the ClickUp step. Update here when ClickUp fields, editors or folders change.",
+  "drive": {
+    "concepts_folder_id": "1Qe3lB5yJwzf6MYCY-YRwXa8b7EqNwdPt",
+    "concepts_folder_path": "Plateful 05 Marketing & Creative > Creative > Briefs > Ads Concepts > Murad Concepts",
+    "brief_template_doc_id": "1DDhP_4rbfi8QKHLwbSyeQW_xC2EXMHBcuMcdoLxVeIM",
+    "model_brief_doc_id": "1A3U5TmEAjdVt9Sn6s7KkZFGyDtgo2y6M3qDOiySQU9U",
+    "batch_intake_template_doc_id": "1KZG__sWIwuzWzIXwH_BRTeMDXA5SQgd6QANeWYXcOXA",
+    "headlines_doc_url": "https://docs.google.com/document/d/1DtGPtd4CCMZzFityIob8H5TpajAgfHewDP1DcQ9HGLw/edit?usp=sharing"
+  },
+  "sheet": {
+    "builder_id": "1da-QSpSxqP-HZY5dhFaT7s-kzhbylZoT9FQzwy1n2UM",
+    "builder_tab": "Meta Ad Name Builde",
+    "last_known_free_row": 5977,
+    "glossary_range": "'Ad Glossary'!D8:AN110",
+    "funnel_range": "'AdSet Glossary'!H7:H16"
+  },
+  "clickup": {
+    "list_id": "901516927548",
+    "default_status": "to do",
+    "owner_id": "112620682",
+    "fields": {
+      "video_editor": "0f8d3fa2-7347-4cb4-867e-e87920e89c7b",
+      "owner": "1af69aae-b73f-4c79-b6a8-b0005b9db30f",
+      "fb_page": "38334b0a-f51f-4740-9058-3018862107cd",
+      "headline": "bc3824d9-d05a-4066-84d5-a6b031466c2f",
+      "launch_date": "ec8f2c60-1196-43a5-a00e-eed47669ed3b",
+      "ad_type": "42cd1956-4f83-43f8-b1bf-190503ea5f5b",
+      "meta": "80c3b9bc-2816-4588-90fe-6c390fc9c56f",
+      "product_line": "26ded289-1b8d-4928-b404-0a4884ba526d",
+      "awareness": "22a96848-311d-4cb5-87ae-c280b05fb2ae",
+      "concept_type": "cdcd1a13-8ffa-48b1-b780-94059088de46",
+      "format": "a2ecde1e-c7c7-403c-8c8b-1862d2ad2fcd",
+      "angle": "686d0c6e-9b26-4cd8-9fb3-24c889db18a1",
+      "persona": "f347b3b3-5765-4811-814f-822f115531ce",
+      "frame_link": "43ec471e-7f60-4752-b80f-14c083c1e3ae"
+    },
+    "ad_type_options": {"VID": "3e1da498-4633-459d-bcd4-91155b137ee0", "IMG": "45ef365e-537b-416e-a792-6545ad2c7a93"},
+    "awareness_options": {
+      "unaware": "75e7772f-2fbc-4756-a279-dbe7ef3fafd0",
+      "problem": "234e07eb-e794-4e47-b5d8-563249edc9d7",
+      "solution": "ca04ef18-a2ba-42fe-a5c6-6df670e6353e",
+      "product": "55065405-f4e9-4723-876b-55453b5b6bb9",
+      "most": "330bb255-ddbe-4d95-8cdb-6ace95549c64"
+    },
+    "concept_type_options": {
+      "new": "86eb8c11-4b02-4338-ad54-5dc3d2f12caa",
+      "iteration": "4e2660ae-833e-4d1e-a52d-c96c18d52255",
+      "iteration-format": "e0d4c465-fc29-4f7a-8aab-caa487f9fe2b",
+      "iteration-avatar": "ba3ae5e1-3dd9-4bac-966a-d49c3dcd6294",
+      "iteration-hook": "b91cfe41-25dc-4492-9b08-9447e1949804",
+      "iteration-footage": "d56e5f68-3e3d-4c66-8ed0-f7c5340bf09b",
+      "iteration-script": "38365589-1704-487f-a729-ad20ea62eb55"
+    },
+    "format_options": {
+      "Podcast": "171098d3-0b33-4f6e-935b-113f492dc77e",
+      "UGC Broll": "433db11f-173b-4f99-9f70-ac623245b2c8",
+      "Professional": "b88bcdce-d5bb-4d74-83d5-e946e92ab5ee",
+      "Pixar Animation": "cc1917ad-f482-435b-9dcb-2851aa24b417",
+      "AISong": "7bfb6c99-ce45-471e-8f4f-a17be74538bb",
+      "AI Avatar": "072a4c5c-837f-4fc5-acd3-775e9ffeba58",
+      "Animation": "9f779a3d-572c-44ca-8eca-006638edbda1"
+    },
+    "naming_format_to_clickup_format": {
+      "Podcast": "Podcast", "Pixar": "Pixar Animation", "AISong": "AISong", "AIAvatar": "AI Avatar",
+      "Animation": "Animation", "CatAnimation": "Animation", "Claymation": "Animation", "Pro": "Professional",
+      "_default": "UGC Broll"
+    },
+    "product_line_options": {
+      "BVS": "e028cc01-43b7-4240-bc3e-7b8b05342fce",
+      "JVS": "14603b57-06ec-4eec-9862-6a3fcd56bb65",
+      "Pan": "a2e41b5f-864a-456f-a15a-490d0f314e17",
+      "CB": "ea071146-3e54-4f3a-a3f8-4d671a43a2e5",
+      "FWM": "6d2eb219-d13f-4caf-9c8d-9e7625ff518e",
+      "Wok": "f03b9495-c0f6-4cc9-ade4-8ad33863b8ec",
+      "TFP": "fa2a6ace-0f50-472e-8057-b802b267937e"
+    }
+  },
+  "editors": {
+    "Azlaan": {"clickup_id": "112621019", "glossary": "Azlaan"},
+    "Kamran": {"clickup_id": "112620713", "glossary": "Kamran"},
+    "Muhammad Haris": {"clickup_id": "112619216", "glossary": "Muhamad"}
+  },
+  "product_names": {"BVS": "VacuSeal", "JVS": "Jar Vacuum Sealer", "Pan": "Titanium Pan", "FWM": "Food Warming Mat", "CB": "Titanium Cutting Board", "CWS": "Cookware Set"}
+}

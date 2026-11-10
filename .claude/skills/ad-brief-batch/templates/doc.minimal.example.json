@@ -1,0 +1,6 @@
+{"documentId": "<doc id>", "revisionId": "<revisionId from read_doc>",
+ "tabs": [
+  {"tabProperties": {"tabId": "t.sjigrsohzgfg", "title": "Brief"}, "documentTab": {"body": {"content": [{"endIndex": 247}]}}},
+  {"tabProperties": {"tabId": "t.8t3mxdgj85te", "title": "Script"}, "documentTab": {"body": {"content": [{"endIndex": 77}]}}},
+  {"tabProperties": {"tabId": "t.0", "title": "Editor Brief"}, "documentTab": {"body": {"content": [{"endIndex": 220}]}}}
+ ]}
