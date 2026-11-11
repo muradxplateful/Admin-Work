@@ -137,11 +137,19 @@ def check_concept(c, allowed, run_week, errors, warnings):
     return n, week
 
 
+def brief_angle(c):
+    """'Reverse psychology' from the Brief tab line '**Angle:** Reverse psychology. ...', title-cased."""
+    for line in c.get("tabs", {}).get("Brief", []):
+        m = re.search(r"\*\*Angle:\*\*\s*([^.]+)", line)
+        if m:
+            return " ".join(w[:1].upper() + w[1:] for w in m.group(1).strip().split())
+    return None
+
+
 def clickup_payload(c, names, doc_url):
     cu, f = CFG["clickup"], CFG["clickup"]["fields"]
     ed = CFG["editors"].get(c["editor"], {})
     editor_id = ed.get("clickup_id") or c.get("editor_clickup_id")
-    fmt = cu["naming_format_to_clickup_format"].get(c["naming"]["format"], cu["naming_format_to_clickup_format"]["_default"])
     esc = lambda s: s.replace("_", "\\_")
     lines = [
         "### General Brief Guidelines:", " Dimensions Needed for Video Ads", "*   16x9", "*   9x16", "*   4x5", "",
@@ -150,21 +158,19 @@ def clickup_payload(c, names, doc_url):
         "- [ ] Content fits in aspect ratios", "- [ ] Clip relevance to the script", "- [ ] Clip quality",
         "- [ ] Natural Voiceover", "", "**Deliverables**", "*   Frame Link:",
         f"*   Headlines and copy: [{CFG['drive']['headlines_doc_url']}]({CFG['drive']['headlines_doc_url']})",
-        "*   Ad Names:", "",
+        "*   Ad Names:",
     ] + [esc(x) for x in names]
     fields = [
         (f["video_editor"], json.dumps({"add": [editor_id]})),
         (f["owner"], json.dumps({"add": [cu["owner_id"]]})),
-        (f["fb_page"], c["fb_page"]),
-        (f["headline"], c.get("headline", "-")),
+        # Murad fills FB Page and Headline later; "x" is his placeholder.
+        (f["fb_page"], c.get("fb_page_field", "x")),
+        (f["headline"], c.get("headline", "x")),
         (f["launch_date"], c["launch_date"]),
         (f["ad_type"], cu["ad_type_options"][c["naming"].get("ad_type", "VID")]),
         (f["meta"], "true"),
         (f["awareness"], cu["awareness_options"][c.get("awareness", "product")]),
-        (f["concept_type"], cu["concept_type_options"][c.get("concept_type", "new")]),
-        (f["format"], cu["format_options"][fmt]),
-        (f["angle"], c["naming"]["pain"]),
-        (f["persona"], c.get("persona_label", c["naming"]["persona"])),
+        (f["angle"], c.get("angle") or brief_angle(c) or c["naming"]["pain"]),
     ]
     if c["product"] in cu["product_line_options"]:
         fields.append((f["product_line"], json.dumps([cu["product_line_options"][c["product"]]])))
@@ -172,7 +178,7 @@ def clickup_payload(c, names, doc_url):
         "list_id": cu["list_id"],
         "name": c.get("task_name") or f"PF - {c['product']} - W{c['_week'][-2:]} - {c['concept']}",
         "status": cu["default_status"],
-        "assignees": [editor_id, cu["owner_id"]],
+        "assignees": [editor_id],
         "markdown_description": "\n".join(lines),
         "custom_fields": [{"id": i, "value": v} for i, v in fields],
     }

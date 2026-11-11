@@ -115,6 +115,11 @@ edits, then `names.py plan` again). Do not publish until he approves.
    `clickup` payload (list_id, name, status, assignees, markdown_description,
    custom_fields). Save the returned task URLs to `task-urls.json`
    (`{"ConceptName": "https://app.clickup.com/t/..."}`).
+   Task conventions (from Murad's own tasks): only the editor is assigned (Murad is
+   Owner), FB Page and Headline are "x" until he fills them, Angle is the Brief tab's
+   "Angle:" line in title case, and Format, Concept Type and Persona are left empty.
+   If Murad has already made some of the tasks himself, read one with
+   `clickup_get_task` first and match it.
 3. Check one task with `clickup_get_task` (include custom_fields).
 4. Paste sheet: Drive `create_file` (spreadsheet) in the concepts folder, title
    `YYYY-MM-DD - Export - Ad Names - PF - W<ww> - <short batch name>`. Run
