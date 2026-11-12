@@ -67,11 +67,18 @@ def glossary(gpath, fpath):
     return allowed
 
 
-def free_block(bpath, count):
+def free_block(bpath, count, gap=30):
+    """First block of `count` free rows that starts at least `gap` rows after the last
+    filled row. The team fills the builder fast; the gap leaves Murad time to paste
+    before someone else takes the same rows."""
     rng, vals = load_values(bpath)
     row0 = int(re.search(r"!B(\d+)", rng).group(1))
+    filled = [i for i, r in enumerate(vals) if len(r) >= 2 and r[1] != ""]
+    start = (filled[-1] + 1 + gap) if filled else 0
     run_start, run_len = None, 0
     for i, r in enumerate(vals):
+        if i < start:
+            continue
         empty = len(r) < 2 or r[1] == ""
         if empty and len(r) >= 1 and r[0]:
             if run_start is None:
@@ -179,6 +186,8 @@ def clickup_payload(c, names, doc_url):
         "name": c.get("task_name") or f"PF - {c['product']} - W{c['_week'][-2:]} - {c['concept']}",
         "status": cu["default_status"],
         "assignees": [editor_id],
+        # Murad: the deadline is 3 days after the task is made, and launch is the same day.
+        "due_date": c.get("due_date") or c["launch_date"],
         "markdown_description": "\n".join(lines),
         "custom_fields": [{"id": i, "value": v} for i, v in fields],
     }
@@ -193,7 +202,7 @@ def plan(a):
     errors, warnings = [], []
     videos = lambda c: len(c["hooks"]) + int(bool(c.get("no_hook_variation")))
     total = sum(videos(c) for c in concepts)
-    first_row, aids = free_block(a.builder, total)
+    first_row, aids = free_block(a.builder, total, a.gap)
     offers = {}
     out = {"run_date": run_date.isoformat(), "run_week": run_week, "first_row": first_row,
            "last_row": first_row + total - 1, "concepts": []}
@@ -266,6 +275,7 @@ def main():
     p1.add_argument("--builder", required=True)
     p1.add_argument("--run-date")
     p1.add_argument("--out", required=True)
+    p1.add_argument("--gap", type=int, default=30, help="free rows to leave after the last filled row")
     p2 = sub.add_parser("paste")
     p2.add_argument("--plan", required=True)
     p2.add_argument("--task-urls", required=True)

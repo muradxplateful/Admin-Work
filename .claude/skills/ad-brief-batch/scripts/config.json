@@ -11,7 +11,7 @@
   "sheet": {
     "builder_id": "1da-QSpSxqP-HZY5dhFaT7s-kzhbylZoT9FQzwy1n2UM",
     "builder_tab": "Meta Ad Name Builde",
-    "last_known_free_row": 6018,
+    "last_known_free_row": 6212,
     "glossary_range": "'Ad Glossary'!D8:AN110",
     "funnel_range": "'AdSet Glossary'!H7:H16"
   },
@@ -35,7 +35,10 @@
       "persona": "f347b3b3-5765-4811-814f-822f115531ce",
       "frame_link": "43ec471e-7f60-4752-b80f-14c083c1e3ae"
     },
-    "ad_type_options": {"VID": "3e1da498-4633-459d-bcd4-91155b137ee0", "IMG": "45ef365e-537b-416e-a792-6545ad2c7a93"},
+    "ad_type_options": {
+      "VID": "3e1da498-4633-459d-bcd4-91155b137ee0",
+      "IMG": "45ef365e-537b-416e-a792-6545ad2c7a93"
+    },
     "awareness_options": {
       "unaware": "75e7772f-2fbc-4756-a279-dbe7ef3fafd0",
       "problem": "234e07eb-e794-4e47-b5d8-563249edc9d7",
@@ -62,8 +65,14 @@
       "Animation": "9f779a3d-572c-44ca-8eca-006638edbda1"
     },
     "naming_format_to_clickup_format": {
-      "Podcast": "Podcast", "Pixar": "Pixar Animation", "AISong": "AISong", "AIAvatar": "AI Avatar",
-      "Animation": "Animation", "CatAnimation": "Animation", "Claymation": "Animation", "Pro": "Professional",
+      "Podcast": "Podcast",
+      "Pixar": "Pixar Animation",
+      "AISong": "AISong",
+      "AIAvatar": "AI Avatar",
+      "Animation": "Animation",
+      "CatAnimation": "Animation",
+      "Claymation": "Animation",
+      "Pro": "Professional",
       "_default": "UGC Broll"
     },
     "product_line_options": {
@@ -74,15 +83,46 @@
       "FWM": "6d2eb219-d13f-4caf-9c8d-9e7625ff518e",
       "Wok": "f03b9495-c0f6-4cc9-ade4-8ad33863b8ec",
       "TFP": "fa2a6ace-0f50-472e-8057-b802b267937e"
-    }
+    },
+    "due_days_after_creation": 3
   },
   "editors": {
-    "Azlaan": {"clickup_id": "112621019", "glossary": "Azlaan"},
-    "Kamran": {"clickup_id": "112620713", "glossary": "Kamran"},
-    "Muhammad Haris": {"clickup_id": "112619216", "glossary": "Muhamad"},
-    "Sid": {"clickup_id": "112620698", "glossary": "Sid"},
-    "Franz": {"clickup_id": "112620715", "glossary": "Franz"},
-    "John M": {"clickup_id": "112623413", "glossary": "John M"}
+    "Azlaan": {
+      "clickup_id": "112621019",
+      "glossary": "Azlaan"
+    },
+    "Kamran": {
+      "clickup_id": "112620713",
+      "glossary": "Kamran"
+    },
+    "Muhammad Haris": {
+      "clickup_id": "112619216",
+      "glossary": "Muhamad"
+    },
+    "Sid": {
+      "clickup_id": "112620698",
+      "glossary": "Sid"
+    },
+    "Franz": {
+      "clickup_id": "112620715",
+      "glossary": "Franz"
+    },
+    "John M": {
+      "clickup_id": "112623413",
+      "glossary": "John M"
+    }
   },
-  "product_names": {"BVS": "VacuSeal", "JVS": "Jar Vacuum Sealer", "Pan": "Titanium Pan", "FWM": "Food Warming Mat", "CB": "Titanium Cutting Board", "CWS": "Cookware Set"}
+  "product_names": {
+    "BVS": "VacuSeal",
+    "JVS": "Jar Vacuum Sealer",
+    "Pan": "Titanium Pan",
+    "FWM": "Food Warming Mat",
+    "CB": "Titanium Cutting Board",
+    "CWS": "Cookware Set"
+  },
+  "editor_formats": {
+    "Muhammad Haris": "drama and cinematic dialogue ads (naming format FullAI)",
+    "Azlaan": "VO + B-roll with talent on screen, story ads, song ads (Broll, AISong)",
+    "Kamran": "faceless VO over hands-only B-roll (Faceless)"
+  }
 }

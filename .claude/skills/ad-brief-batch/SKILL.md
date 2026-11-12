@@ -58,7 +58,34 @@ Copy `templates/concept.example.json` (a finished, tested concept: ReturnedOrder
   `reference/brief-structure.md` line by line. Get beat times from `timing.py`:
   write the beats to `beats-<Name>.json` and run `python3 $S/timing.py beats-<Name>.json`.
 
+## Standing rules from Murad
+
+- **Editors** are Kamran Zafar, Muhammad Haris and Azlaan Tauheed. When the batch names
+  no editor, assign by format (see `editor_formats` in `config.json`): dramas and
+  cinematic dialogue ads to Muhammad Haris, B-roll story and song ads to Azlaan,
+  faceless VO to Kamran. Spread the batch so each gets a similar share.
+- **Deadline:** due date = 3 days after the tasks are made, and Launch Date is the same
+  day (`clickup.due_days_after_creation`). Put `due_date` and `launch_date` in each
+  concept file.
+- **Funnel by awareness** (when the batch gives none): unaware or problem aware = TOF,
+  solution aware = MOF, product or most aware = BOF.
+- **FB page in the names:** FamilyKitchenGuide unless told otherwise. The ClickUp FB Page
+  and Headline fields stay "x".
+- **Ad name format values** that match past ads: dramas = FullAI, song ads = AISong,
+  VO + B-roll with talent = Broll, faceless VO = Faceless.
+
 ## 4. Create the docs (drafts)
+
+**When the batch doc already holds full briefs** (one parent tab per concept with
+"N · Brief", "N · Script" and "N · Editor Brief" child tabs), don't rebuild the text.
+For each concept: `copy_file` the batch doc into the concepts folder with the concept's
+title, `read_doc` the copy (it saves to a file; read tab IDs with python), then one
+`update_doc` call that `deleteTab`s every other concept's parent tab and renames the
+three child tabs to Brief, Script and Editor Brief (`updateDocumentTabProperties` works
+now). The copy keeps Murad's formatting exactly. Tab IDs are the same in every copy.
+
+**When the batch is plain scripts**, build each doc from the template:
+
 
 For each concept:
 
@@ -110,7 +137,10 @@ edits, then `names.py plan` again). Do not publish until he approves.
 ## 7. Publish (after approval)
 
 1. Re-read `builder.json` and run `names.py plan` again, in case someone took the
-   AIDs since the review. If the AIDs changed, tell Murad the new range.
+   AIDs since the review. If the AIDs changed, tell Murad the new range. `plan` leaves
+   a 30-row gap after the last filled row (`--gap`), because teammates fill the builder
+   while Murad is still pasting; in November 2026 two blocks were taken within minutes.
+   Read the builder again right before writing the paste sheet, and once more at the end.
 2. For each concept in `plan.json`, call ClickUp `clickup_create_task` with its
    `clickup` payload (list_id, name, status, assignees, markdown_description,
    custom_fields). Save the returned task URLs to `task-urls.json`
@@ -137,9 +167,8 @@ anything still open. Link every doc and sheet you name.
 
 ## Known limits
 
-- The Docs connector can't rename tabs (`updateDocumentTabProperties` returns an
-  internal error). That's why each brief is a copy of the template, which already has
-  the right tab names.
+- Tab renames (`updateDocumentTabProperties`) and `deleteTab` work as of November 2026;
+  earlier they returned an internal error.
 - `replaceAllText` gives the replacement the style of the first character it replaces;
   for small edits next to a bold label, delete and insert at the exact range instead.
 - The Naming Convention Builder is view-only for the cloud account; keep the paste
