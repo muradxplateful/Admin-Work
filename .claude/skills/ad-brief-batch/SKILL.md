@@ -76,6 +76,14 @@ Copy `templates/concept.example.json` (a finished, tested concept: ReturnedOrder
 
 ## 4. Create the docs (drafts)
 
+**Default since 2026-11-16: no separate docs.** When the batch doc already holds the
+full briefs with one tab per concept, Murad wants the ClickUp task to link straight to
+that concept's tab: `https://docs.google.com/document/d/<batch doc id>/edit?tab=<tabId>`.
+Get the tab IDs from `read_doc` (the result saves to a file; walk `tabs` and
+`childTabs` with python), put that link in each concept file as `doc_url`, and skip the
+rest of this step. Only build separate docs when Murad asks for them.
+
+
 **When the batch doc already holds full briefs** (one parent tab per concept with
 "N · Brief", "N · Script" and "N · Editor Brief" child tabs), don't rebuild the text.
 For each concept: `copy_file` the batch doc into the concepts folder with the concept's
@@ -151,7 +159,12 @@ edits, then `names.py plan` again). Do not publish until he approves.
    If Murad has already made some of the tasks himself, read one with
    `clickup_get_task` first and match it.
 3. Check one task with `clickup_get_task` (include custom_fields).
-4. Paste sheet: Drive `create_file` (spreadsheet) in the concepts folder, title
+4. Paste sheet. Fastest way: write the `names.py paste` values to a CSV in the batch
+   folder and upload it with Drive `create_file` (`contentMimeType: text/csv`,
+   `base64Content: sha256:<hash>:<absolute path>`, parent the concepts folder); it
+   converts to a Sheet without echoing every row. Then rename the tab to `Ad Names`
+   (get its sheetId with Sheets `get_spreadsheet`), bold and freeze row 1, and read
+   the last rows back. Otherwise: Drive `create_file` (spreadsheet) in the concepts folder, title
    `YYYY-MM-DD - Export - Ad Names - PF - W<ww> - <short batch name>`. Run
    `python3 $S/names.py paste --plan plan.json --task-urls task-urls.json` and write
    its `values` to `Sheet1!A1` with Sheets `update_values`; rename the tab to
