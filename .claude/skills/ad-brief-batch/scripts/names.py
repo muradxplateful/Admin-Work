@@ -67,7 +67,7 @@ def glossary(gpath, fpath):
     return allowed
 
 
-def free_block(bpath, count, gap=30):
+def free_block(bpath, count, gap=0):
     """First block of `count` free rows that starts at least `gap` rows after the last
     filled row. The team fills the builder fast; the gap leaves Murad time to paste
     before someone else takes the same rows."""
@@ -275,7 +275,7 @@ def main():
     p1.add_argument("--builder", required=True)
     p1.add_argument("--run-date")
     p1.add_argument("--out", required=True)
-    p1.add_argument("--gap", type=int, default=30, help="free rows to leave after the last filled row")
+    p1.add_argument("--gap", type=int, default=0, help="free rows to leave after the last filled row")
     p2 = sub.add_parser("paste")
     p2.add_argument("--plan", required=True)
     p2.add_argument("--task-urls", required=True)

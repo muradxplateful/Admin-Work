@@ -145,10 +145,14 @@ edits, then `names.py plan` again). Do not publish until he approves.
 ## 7. Publish (after approval)
 
 1. Re-read `builder.json` and run `names.py plan` again, in case someone took the
-   AIDs since the review. If the AIDs changed, tell Murad the new range. `plan` leaves
-   a 30-row gap after the last filled row (`--gap`), because teammates fill the builder
-   while Murad is still pasting; in November 2026 two blocks were taken within minutes.
-   Read the builder again right before writing the paste sheet, and once more at the end.
+   AIDs since the review. If the AIDs changed, tell Murad the new range. `plan` numbers
+   from the first row after the last filled one (`--gap 0`, the default), because Murad
+   pastes there. Teammates fill the builder fast (in November 2026 a block was taken
+   within minutes several times), so make the paste sheet first, then the ClickUp
+   names, and read the builder again at the end. If rows were taken, re-plan, rewrite
+   the sheet's AIDs and update the task descriptions. If Murad sends back the names he
+   actually pasted, put those in the tasks.
+   The ClickUp connector drops parallel calls: create and update tasks one call at a time.
 2. For each concept in `plan.json`, call ClickUp `clickup_create_task` with its
    `clickup` payload (list_id, name, status, assignees, markdown_description,
    custom_fields). Save the returned task URLs to `task-urls.json`
