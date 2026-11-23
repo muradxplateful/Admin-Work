@@ -33,7 +33,9 @@
       "format": "a2ecde1e-c7c7-403c-8c8b-1862d2ad2fcd",
       "angle": "686d0c6e-9b26-4cd8-9fb3-24c889db18a1",
       "persona": "f347b3b3-5765-4811-814f-822f115531ce",
-      "frame_link": "43ec471e-7f60-4752-b80f-14c083c1e3ae"
+      "frame_link": "43ec471e-7f60-4752-b80f-14c083c1e3ae",
+      "applovin": "2e924e54-5ff7-4dfb-b714-e4f504cf3ac9",
+      "week": "dba8b216-4a4c-43ee-b7be-39cb24b31aa8"
     },
     "ad_type_options": {
       "VID": "3e1da498-4633-459d-bcd4-91155b137ee0",
@@ -62,7 +64,8 @@
       "Pixar Animation": "cc1917ad-f482-435b-9dcb-2851aa24b417",
       "AISong": "7bfb6c99-ce45-471e-8f4f-a17be74538bb",
       "AI Avatar": "072a4c5c-837f-4fc5-acd3-775e9ffeba58",
-      "Animation": "9f779a3d-572c-44ca-8eca-006638edbda1"
+      "Animation": "9f779a3d-572c-44ca-8eca-006638edbda1",
+      "Cinematic": "52e25ea2-c979-46a1-ad44-ff3022856ac0"
     },
     "naming_format_to_clickup_format": {
       "Podcast": "Podcast",
@@ -84,7 +87,16 @@
       "Wok": "f03b9495-c0f6-4cc9-ade4-8ad33863b8ec",
       "TFP": "fa2a6ace-0f50-472e-8057-b802b267937e"
     },
-    "due_days_after_creation": 3
+    "due_days_after_creation": 3,
+    "week_options": {
+      "45": "1b2eaf98-8fda-40b1-803d-b0de45305d9e",
+      "46": "defe8155-a34d-4f96-8bf9-3711508e4be2",
+      "47": "7d733b7a-67dc-4471-aeab-58c4ec827da5",
+      "48": "5e087792-c5f5-4cf3-a533-14f72116fca7",
+      "49": "f1943ea9-44cd-4642-a856-2dda8f11399e",
+      "50": "3189d2f2-8f73-46f9-9960-0e9ba9aadd3d",
+      "51": "d76f8875-15bd-4528-bb0a-0470f7a355ef"
+    }
   },
   "editors": {
     "Azlaan": {

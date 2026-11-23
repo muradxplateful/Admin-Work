@@ -5,6 +5,40 @@ description: Turn Murad's batch doc of plain ad scripts (hooks, body, reference)
 
 # Ad brief batch
 
+## Current process (from 2026-11-23): tickets only, no ad names
+
+Ad names are now generated automatically when a ticket moves to "to launch". Do NOT
+claim AIDs, build names or make a paste sheet. Each Creative Pipeline task
+(list `901516927548`) must have, or the automation comments asking for a fix:
+
+1. Name `PF - <PRODUCT> - W<ww> - <ConceptName>` (ISO week of the day the task is made).
+2. Hooks numbered H1, H2, H3 ... one ad per hook. Batch briefs label them "Hook 1:",
+   so copy each hook into the task description as `H1: <hook text>` under
+   "**Hooks (one ad per hook):**", and add the no-hook version as the last H
+   (`H7: No hook (the video starts at the body)`). Statics: fill Number of Ads instead
+   (no such field on the list yet in November 2026; ask Murad if a static comes up).
+3. The brief: link the concept's tab in the batch doc on the "Brief and Script doc:"
+   line (`.../edit?tab=<tabId>`).
+4. Meta ticked (and/or Applovin, field `applovin`); neither ticked means Meta.
+5. Ad Type, Awareness, Format, Persona, Angle, FB Page, Owner, Video Editor filled:
+   - Format: one of `clickup.format_options` (VO + B-roll = UGC Broll, songs =
+     AISong, Pixar = Pixar Animation, AI presenter = AI Avatar, 2D/whiteboard =
+     Animation, drama = Cinematic, studio = Professional, podcast = Podcast).
+   - Persona: the Ad Glossary persona code (FWMHolidayHostess, JVSBulkBuyer ...).
+   - FB Page: the real page (FamilyKitchenGuide unless told otherwise), not "x".
+   - Angle: the brief's Angle line in title case. Owner: Murad. Headline stays "x".
+   Also set Week (`week_options`), Product Line, Concept Type (New Concept), Launch
+   Date and due date (both 3 days after creation), and assign only the editor.
+
+Steps: read the batch doc (`read_doc`, tab IDs and text via python), pick editors by
+format (standing rules below), create the tasks one call at a time (the connector
+drops parallel calls), read them back with `task.get_many` and check every field
+above. Final message: task links, editors, and the field choices to confirm.
+
+The sections below are the older full process (separate docs, `names.py`, paste
+sheet). Use them only if Murad asks for names or separate docs again.
+
+
 Manual run, one batch at a time. Nothing goes to ClickUp or the paste sheet until
 Murad approves the review summary.
 
